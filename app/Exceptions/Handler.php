@@ -48,6 +48,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // APIのレスポンスをJSON形式に変更
+        if ($request->is('api/*')) {
+            return response()->json(['code' => 500, 'result' => 'An error occurred while processing'], 500);
+        }
+
         return parent::render($request, $exception);
     }
 }
