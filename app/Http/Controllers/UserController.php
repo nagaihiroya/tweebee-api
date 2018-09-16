@@ -38,4 +38,29 @@ class UserController extends Controller
 
         return CommonUtil::makeResponseParam(200, 000);
     }
+
+    /**
+     * ユーザー情報返却API
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getUserInformation(Request $request) {
+        $data = $request->all();
+
+        // パラメータの整合性チェック
+        $result = UserFoundation::paramValidationUserInfo($data);
+        if (!empty($result)) {
+            return CommonUtil::makeResponseParam(400, ErrorConst::PARAMETER_INVALID_ERROR, $result);
+        }
+
+        // TODO: フロント実装のためにテストデータを返す nagai
+        // ユーザー基礎情報取得
+        // $userData = UserFoundation::where('user_id', $data['user_id'])->first();
+        // if (empty($userData)) {
+        //     return CommonUtil::makeResponseParam(400, ErrorConst::USER_NOT_EXIST_ERROR);
+        // }
+        $stub = ['id' => '1260664039', 'name' => 'あしかわ', 'screen_name' => 'pd_made', 'description' => 'プログラマー/the BANZ_vo/黒猫_vo/NAMAZ_vo', 'location' => '', 'url' => null, 'profile_image_url_https' => 'https://pbs.twimg.com/profile_images/950286267647799296/FspWXyM__normal.jpg'];
+        return CommonUtil::makeResponseParam(200, 000, $stub);
+    }
 }
