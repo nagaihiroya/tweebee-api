@@ -72,4 +72,19 @@ class UserFoundation extends Model
             'oauth_token_secret' => $data['oauth_token_secret'],
         );
     }
+
+    /**
+     * パラメータの整合性チェック(getUserInfo)
+     *
+     * @param $data リクエストパラメータ
+     * @return array エラー配列
+     */
+    public static function paramValidationUserInfo($data)
+    {
+        $validatedData = Validator::make($data,[
+            'user_id' => 'required',
+        ]);
+
+        return $validatedData->errors()->all();
+    }
 }
