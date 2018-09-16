@@ -226,6 +226,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'CommonUtil' => App\Facades\CommonUtil::class,
+        'TwitterUtil' => App\Facades\TwitterUtil::class,
 
     ],
 

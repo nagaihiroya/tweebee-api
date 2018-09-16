@@ -27,5 +27,9 @@ class AppServiceProvider extends ServiceProvider
             'CommonUtil',
             'App\Utils\CommonUtil'
         );
+        $this->app->bind(
+            'TwitterUtil',
+            'App\Utils\TwitterUtil'
+        );
     }
 }
