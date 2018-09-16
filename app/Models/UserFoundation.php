@@ -34,12 +34,28 @@ class UserFoundation extends Model
     public static function paramValidation($data)
     {
         $validatedData = Validator::make($data,[
-            'user_id' => ['required','unique:user_foundations','max:255'],
+            'user_id' => ['required','max:255'],
             'oauth_token' => 'required|max:255',
             'oauth_token_secret' => 'required|max:255',
         ]);
 
         return $validatedData->errors()->all();
+    }
+
+    /**
+     * ユーザーが登録済みかどうか判定
+     *
+     * @param string $userId ユーザーID
+     * @return bool 登録済みかどうか
+     */
+    public static function checkAlreadyRegister($userId)
+    {
+        $data = UserFoundation::where('user_id', $userId)->first();
+
+        if (empty($data)) {
+            return false;
+        }
+        return true;
     }
 
     /**
