@@ -5,7 +5,8 @@ namespace App\Constants;
 /**
  * ステータスコード定数クラス
  */
-class StatusCodeConst {
+class StatusCodeConst
+{
     // 正常終了コード
     const SUCCESS_CODE = 000;
     // パラメータバリデーションエラーコード

@@ -19,7 +19,8 @@ class HobbyTagMaster extends Model
      *
      * @return array 趣味ジャンルマスタ
      */
-    public static function getHobbyTagMaster() {
+    public static function getHobbyTagMaster()
+    {
         return DB::table('hobby_tag_master')->where('is_active', 1)->get();
     }
 }

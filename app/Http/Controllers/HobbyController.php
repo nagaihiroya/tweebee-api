@@ -17,7 +17,8 @@ class HobbyController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function getHobbyMaster(Request $request) {
+    public function getHobbyMaster(Request $request)
+    {
         $data = $request->all();
 
         $category = HobbyCategoryMaster::getHobbyCategoryMaster();

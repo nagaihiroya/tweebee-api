@@ -17,7 +17,8 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function foundationRegister(Request $request) {
+    public function foundationRegister(Request $request)
+    {
         $data = $request->all();
 
         // パラメータの整合性チェック
@@ -47,7 +48,8 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function getUserInformation(Request $request) {
+    public function getUserInformation(Request $request)
+    {
         $data = $request->all();
 
         // パラメータの整合性チェック
@@ -75,7 +77,8 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function hobbyInfoRegister(Request $request) {
+    public function hobbyInfoRegister(Request $request)
+    {
         $data = $request->all();
 
         // パラメータの整合性チェック
@@ -99,7 +102,8 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function hobbyInfoDelete(Request $request) {
+    public function hobbyInfoDelete(Request $request)
+    {
         $data = $request->all();
 
         // パラメータの整合性チェック

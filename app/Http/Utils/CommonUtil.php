@@ -14,7 +14,8 @@ class CommonUtil
      * @param array $data 結果データ
      * @return string レスポンスデータ
      */
-    public function makeResponseParam($statusCode, $code, $data = null) {
+    public function makeResponseParam($statusCode, $code, $data = null)
+    {
         $result = empty($data) ? null : $data;
 
         return response()->json(['code' => $code, 'result' => $result], $statusCode);
@@ -28,7 +29,8 @@ class CommonUtil
      * @param array $tag 趣味タグ情報
      * @return array $result 趣味マスタ情報
      */
-    public function allHobbyMasterShaper($category, $genre, $tag) {
+    public function allHobbyMasterShaper($category, $genre, $tag)
+    {
         $tagTmp = [];
         foreach ($tag as $value) {
             $tagTmp[$value->genre_id] = ['tagId' => $value->id, 'tagName' => $value->tag_name];

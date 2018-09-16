@@ -19,7 +19,8 @@ class HobbyCategoryMaster extends Model
      *
      * @return array 趣味カテゴリマスタ
      */
-    public static function getHobbyCategoryMaster() {
+    public static function getHobbyCategoryMaster()
+    {
         return DB::table('hobby_category_master')->where('is_active', 1)->get();
     }
 }

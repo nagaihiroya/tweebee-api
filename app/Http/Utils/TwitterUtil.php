@@ -36,7 +36,8 @@ class TwitterUtil
      * @param array $twitterUserInfo アカウント情報
      * @return array $result アカウント情報(整形済み)
      */
-    private function twitterInfoShaper($twitterUserInfo) {
+    private function twitterInfoShaper($twitterUserInfo)
+    {
         return $result = [
             'id' => $twitterUserInfo->id,
             'name' => $twitterUserInfo->name,
