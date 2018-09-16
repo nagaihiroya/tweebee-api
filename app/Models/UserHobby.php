@@ -60,4 +60,34 @@ class UserHobby extends Model
             'is_active' => 1,
         );
     }
+
+    /**
+     * パラメータの整合性チェック(削除)
+     *
+     * @param $data リクエストパラメータ
+     * @return array エラー配列
+     */
+    public static function paramValidationHobbyDelete($data)
+    {
+        $validatedData = Validator::make($data,[
+            'user_id' => ['required','max:255'],
+            'hobby_id' => 'required',
+        ]);
+
+        return $validatedData->errors()->all();
+    }
+
+    /**
+     * ユーザー趣味情報の論理削除
+     *
+     * @param array $data ユーザー趣味情報
+     * @return boolean 削除成否
+     */
+    public static function deleteUserHobbyInfo($data)
+    {
+        return DB::table('user_hobbies')
+            ->where('id', $data['hobby_id'])
+            ->where('user_id', $data['user_id'])
+            ->update(['is_active' => 0]);
+    }
 }

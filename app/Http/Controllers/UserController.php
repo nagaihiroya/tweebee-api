@@ -90,6 +90,29 @@ class UserController extends Controller
             return CommonUtil::makeResponseParam(400, ErrorConst::USER_NOT_EXIST_ERROR);
         }
 
-        return CommonUtil::makeResponseParam(200, 000, $result);
+        return CommonUtil::makeResponseParam(200, 000, ['hobbyId' => $result]);
+    }
+
+    /**
+     * ユーザー趣味情報削除API
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function hobbyInfoDelete(Request $request) {
+        $data = $request->all();
+
+        // パラメータの整合性チェック
+        $result = UserHobby::paramValidationHobbyDelete($data);
+        if (!empty($result)) {
+            return CommonUtil::makeResponseParam(400, ErrorConst::PARAMETER_INVALID_ERROR, $result);
+        }
+        // 対象レコードの論理削除
+        $result = UserHobby::deleteUserHobbyInfo($data);
+        if (!$result) {
+            return CommonUtil::makeResponseParam(400, ErrorConst::USER_NOT_EXIST_ERROR);
+        }
+
+        return CommonUtil::makeResponseParam(200, 000);
     }
 }
