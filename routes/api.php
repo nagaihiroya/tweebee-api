@@ -17,3 +17,7 @@ Route::group(['prefix' => 'user'], function() {
     Route::post('/register', 'UserController@foundationRegister');
     Route::post('/info', 'UserController@getUserInformation');
 });
+
+Route::group(['prefix' => 'hobby'], function() {
+    Route::post('/master', 'HobbyController@getHobbyMaster');
+});
