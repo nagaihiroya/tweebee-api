@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\UserFoundation;
+use App\Models\UserFoundation;
 use App\Constants\ErrorConst;
 use CommonUtil;
 
