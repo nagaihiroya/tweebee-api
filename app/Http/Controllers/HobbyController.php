@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\HobbyCategoryMaster;
 use App\Models\HobbyGenreMaster;
 use App\Models\HobbyTagMaster;
-use App\Constants\ErrorConst;
+use App\Constants\StatusCodeConst;
 use CommonUtil;
 
 class HobbyController extends Controller
@@ -27,6 +27,6 @@ class HobbyController extends Controller
         // 各マスタデータ整形
         $hobbyMaster = CommonUtil::allHobbyMasterShaper($category, $genre, $tag);
 
-        return CommonUtil::makeResponseParam(200, 000, $hobbyMaster);
+        return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE, $hobbyMaster);
     }
 }

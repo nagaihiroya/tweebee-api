@@ -2,7 +2,7 @@
 namespace App\Utils;
 
 use App\Constants\CommonConst;
-use App\Constants\ErrorConst;
+use App\Constants\StatusCodeConst;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 class TwitterUtil
