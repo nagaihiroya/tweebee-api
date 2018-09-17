@@ -23,4 +23,5 @@ Route::group(['prefix' => 'user'], function() {
 
 Route::group(['prefix' => 'hobby'], function() {
     Route::post('/master', 'HobbyController@getHobbyMaster');
+    Route::post('/register/{type}', 'HobbyController@hobbyRegister');
 });

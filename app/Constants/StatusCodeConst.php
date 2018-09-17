@@ -21,4 +21,6 @@ class StatusCodeConst
     const USER_HOBBY_DELETE_ERROR = "105";
     //　ユーザー趣味情報重複エラーコード
     const USER_HOBBY_ALREADY_REGISTER_ERROR = "106";
+    //　ユーザー趣味情報重複エラーコード
+    const HOBBY_ALREADY_REGISTER_ERROR = "107";
 }
