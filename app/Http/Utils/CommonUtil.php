@@ -33,11 +33,11 @@ class CommonUtil
     {
         $tagTmp = [];
         foreach ($tag as $value) {
-            $tagTmp[$value->genre_id] = ['tagId' => $value->id, 'tagName' => $value->tag_name];
+            $tagTmp[$value->genre_id][] = ['tagId' => $value->id, 'tagName' => $value->tag_name];
         }
         $genreTmp = [];
         foreach ($genre as $value) {
-            $genreTmp[$value->category_id] = ['genreId' => $value->id, 'genreName' => $value->genre_name, 'tag' => $tagTmp[$value->id]];
+            $genreTmp[$value->category_id][] = ['genreId' => $value->id, 'genreName' => $value->genre_name, 'tag' => $tagTmp[$value->id]];
         }
         $result = [];
         foreach ($category as $value) {
