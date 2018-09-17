@@ -13,6 +13,7 @@ class HobbyGenreTableSeeder extends Seeder
     {
         DB::table('hobby_genre_master')->truncate();
         DB::table('hobby_genre_master')->insert(['id' => '1', 'category_id' => '1', 'genre_name' => '邦ロック', 'is_active' => 1,]);
+        DB::table('hobby_genre_master')->insert(['id' => '18', 'category_id' => '1', 'genre_name' => '洋ロック', 'is_active' => 1,]);
         DB::table('hobby_genre_master')->insert(['id' => '2', 'category_id' => '2', 'genre_name' => 'RPG', 'is_active' => 1,]);
         DB::table('hobby_genre_master')->insert(['id' => '3', 'category_id' => '3', 'genre_name' => 'サッカー', 'is_active' => 1,]);
         DB::table('hobby_genre_master')->insert(['id' => '4', 'category_id' => '4', 'genre_name' => 'ストリート系', 'is_active' => 1,]);

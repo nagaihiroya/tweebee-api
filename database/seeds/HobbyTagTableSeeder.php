@@ -13,6 +13,7 @@ class HobbyTagTableSeeder extends Seeder
     {
         DB::table('hobby_tag_master')->truncate();
         DB::table('hobby_tag_master')->insert(['genre_id' => '1', 'tag_name' => 'ELLEGARDEN', 'is_active' => 1,]);
+        DB::table('hobby_tag_master')->insert(['genre_id' => '18', 'tag_name' => 'RED HOT CHILI PEPERS', 'is_active' => 1,]);
         DB::table('hobby_tag_master')->insert(['genre_id' => '2', 'tag_name' => 'FINAL FANTASY', 'is_active' => 1,]);
         DB::table('hobby_tag_master')->insert(['genre_id' => '3', 'tag_name' => '鹿島アントラーズ', 'is_active' => 1,]);
         DB::table('hobby_tag_master')->insert(['genre_id' => '4', 'tag_name' => 'BALENCIAGA', 'is_active' => 1,]);
