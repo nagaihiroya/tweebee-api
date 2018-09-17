@@ -90,4 +90,70 @@ class UserHobby extends Model
             ->where('user_id', $data['user_id'])
             ->update(['is_active' => 0]);
     }
+
+    /**
+     * パラメータの整合性チェック(取得)
+     *
+     * @param $data リクエストパラメータ
+     * @return array エラー配列
+     */
+    public static function paramValidationHobbyGet($data)
+    {
+        $validatedData = Validator::make($data,[
+            'user_id' => ['required','max:255'],
+        ]);
+
+        return $validatedData->errors()->all();
+    }
+
+    /**
+     * ユーザー趣味情報取得
+     *
+     * @param array $data ユーザー情報(ユーザーID)
+     * @return array $result ユーザー趣味情報
+     */
+    public static function getUserHobbyInfo($data)
+    {
+        $result = [];
+        $tmp = DB::table('user_hobbies')
+            ->where('user_id', $data['user_id'])
+            ->where('is_active', 1)
+            ->orderBy('id', 'asc')
+            ->get();
+        foreach ($tmp as $value) {
+            $result[] = $value;
+        }
+        return $result;
+    }
+
+    /**
+     * ユーザー趣味情報整形
+     *
+     * @param array $data ユーザー趣味情報
+     * @return array $result ユーザー趣味情報(整形済み)
+     */
+    public static function userHobbyInfoShaper($data, $hobbyMaster)
+    {
+        list($category, $genre, $tag) = $hobbyMaster;
+
+        $result = [];
+        foreach ($data as $value) {
+            $result[] = [
+                'hobbyId' => $value->id,
+                'hobbyInfo' => [
+                    'categoryId' => $value->category_id,
+                    'categoryName' => $category[$value->category_id],
+                    'genre' => [
+                        'genreId' => isset($value->genre_id) ? $value->genre_id : null,
+                        'genreName' => isset($genre[$value->genre_id]) ? $genre[$value->genre_id] : null,
+                        'tag' => [
+                            'tagId' => isset($value->tag_id) ? $value->tag_id : null,
+                            'tagName' => isset($tag[$value->tag_id]) ? $tag[$value->tag_id] : null,
+                        ],
+                    ],
+                ],
+            ];
+        }
+        return $result;
+    }
 }

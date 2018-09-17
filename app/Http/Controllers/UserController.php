@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\UserFoundation;
 use App\Models\UserHobby;
 use App\Constants\StatusCodeConst;
+use App\Models\HobbyCategoryMaster;
+use App\Models\HobbyGenreMaster;
+use App\Models\HobbyTagMaster;
 use CommonUtil;
 use TwitterUtil;
 
@@ -118,5 +121,39 @@ class UserController extends Controller
         }
 
         return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE);
+    }
+
+    /**
+     * ユーザー趣味情報取得API
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function hobbyInfoGet(Request $request)
+    {
+        $data = $request->all();
+
+        // パラメータの整合性チェック
+        $result = UserHobby::paramValidationHobbyGet($data);
+        if (!empty($result)) {
+            return CommonUtil::makeResponseParam(400, StatusCodeConst::PARAMETER_INVALID_ERROR, $result);
+        }
+        // ユーザー趣味情報取得
+        $result = UserHobby::getUserHobbyInfo($data);
+        if (empty($result)) {
+            // 趣味情報が登録されていない場合は空配列を返却
+            return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE);
+        }
+
+        // 趣味マスタ取得
+        $category = HobbyCategoryMaster::getHobbyCategoryMaster();
+        $genre = HobbyGenreMaster::getHobbyGenreMaster();
+        $tag = HobbyTagMaster::getHobbyTagMaster();
+        // マスタデータ整形
+        $hobbyMaster = CommonUtil::hobbyMasterShaper($category, $genre, $tag);
+        // 結果データの整形
+        $userHobbyInfo = UserHobby::userHobbyInfoShaper($result, $hobbyMaster);
+
+        return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE, $userHobbyInfo);
     }
 }
