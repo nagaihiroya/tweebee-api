@@ -25,9 +25,9 @@ class UserHobby extends Model
     {
         $validatedData = Validator::make($data,[
             'user_id' => ['required','max:255'],
-            'category_id' => ['required','max:255',"regex:/^(?:(?![\xF0-\xF7][\x80-\xBF][\x80-\xBF][\x80-\xBF]).)*$/"],
-            'genre_id' => ['max:255',"regex:/^(?:(?![\xF0-\xF7][\x80-\xBF][\x80-\xBF][\x80-\xBF]).)*$/"],
-            'tag_id' => ['max:255',"regex:/^(?:(?![\xF0-\xF7][\x80-\xBF][\x80-\xBF][\x80-\xBF]).)*$/"],
+            'category_id' => 'required|max:255',
+            'genre_id' => 'max:255',
+            'tag_id' => 'max:255',
         ]);
 
         return $validatedData->errors()->all();
@@ -155,5 +155,27 @@ class UserHobby extends Model
             ];
         }
         return $result;
+    }
+
+    /**
+     * ユーザー趣味情報が登録済み判定
+     *
+     * @param $data ユーザー趣味情報
+     * @return bool 登録済みか
+     */
+    public static function isAlreadyRegister($data)
+    {
+        $result = DB::table('user_hobbies')
+            ->where('user_id', $data['user_id'])
+            ->where('is_active', 1)
+            ->where('category_id', $data['category_id'])
+            ->where('genre_id', isset($data['genre_id']) ? $data['genre_id'] : null)
+            ->where('tag_id', isset($data['tag_id']) ? $data['tag_id'] : null)
+            ->first();
+
+        if (empty($result)) {
+            return false;
+        }
+        return true;
     }
 }

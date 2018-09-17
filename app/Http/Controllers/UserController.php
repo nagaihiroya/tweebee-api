@@ -89,6 +89,11 @@ class UserController extends Controller
         if (!empty($result)) {
             return CommonUtil::makeResponseParam(400, StatusCodeConst::PARAMETER_INVALID_ERROR, $result);
         }
+        // ユーザー趣味情報が登録済みか判定
+        $result = UserHobby::isAlreadyRegister($data);
+        if ($result) {
+            return CommonUtil::makeResponseParam(400, StatusCodeConst::USER_HOBBY_ALREADY_REGISTER_ERROR);
+        }
         // 登録データセット
         $registData = UserHobby::registDataSet($data);
         $result = UserHobby::registerUserHobbyInfo($registData);
