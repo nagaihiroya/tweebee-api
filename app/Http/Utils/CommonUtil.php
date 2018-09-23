@@ -37,11 +37,11 @@ class CommonUtil
         }
         $genreTmp = [];
         foreach ($genre as $value) {
-            $genreTmp[$value->category_id][] = ['genreId' => $value->id, 'genreName' => $value->genre_name, 'tag' => $tagTmp[$value->id]];
+            $genreTmp[$value->category_id][] = ['genreId' => $value->id, 'genreName' => $value->genre_name, 'tag' => isset($tagTmp[$value->id]) ? $tagTmp[$value->id] : null];
         }
         $result = [];
         foreach ($category as $value) {
-            $result[] = ['categoryId' => $value->id, 'categoryName' => $value->category_name, 'genre' => $genreTmp[$value->id]];
+            $result[] = ['categoryId' => $value->id, 'categoryName' => $value->category_name, 'genre' => isset($genreTmp[$value->id]) ? $genreTmp[$value->id] : null];
         }
         return $result;
     }
