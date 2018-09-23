@@ -126,8 +126,22 @@ class UserController extends Controller
         if (!$result) {
             return CommonUtil::makeResponseParam(400, StatusCodeConst::USER_HOBBY_DELETE_ERROR);
         }
+        // ユーザー趣味情報取得
+        $result = UserHobby::getUserHobbyInfo($data);
+        if (empty($result)) {
+            // 趣味情報が登録されていない場合は空配列を返却
+            return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE);
+        }
+        // 趣味マスタ取得
+        $category = HobbyCategoryMaster::getHobbyCategoryMaster();
+        $genre = HobbyGenreMaster::getHobbyGenreMaster();
+        $tag = HobbyTagMaster::getHobbyTagMaster();
+        // マスタデータ整形
+        $hobbyMaster = CommonUtil::hobbyMasterShaper($category, $genre, $tag);
+        // 結果データの整形
+        $userHobbyInfo = UserHobby::userHobbyInfoShaper($result, $hobbyMaster);
 
-        return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE);
+        return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE, $userHobbyInfo);
     }
 
     /**
