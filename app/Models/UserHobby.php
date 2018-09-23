@@ -178,4 +178,18 @@ class UserHobby extends Model
         }
         return true;
     }
+
+    /**
+     * ユーザー趣味情報取得
+     *
+     * @param int $hobbyId ユーザー趣味情報ID
+     * @param array ユーザー趣味情報
+     */
+    public static function getHobbyInfoFindByPk($hobbyId)
+    {
+        return DB::table('user_hobbies')
+            ->where('id', $hobbyId)
+            ->where('is_active', 1)
+            ->first();
+    }
 }

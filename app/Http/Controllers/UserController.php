@@ -96,10 +96,12 @@ class UserController extends Controller
         }
         // 登録データセット
         $registData = UserHobby::registDataSet($data);
-        $result = UserHobby::registerUserHobbyInfo($registData);
-        if (empty($result)) {
+        $hobbyId = UserHobby::registerUserHobbyInfo($registData);
+        if (empty($hobbyId)) {
             return CommonUtil::makeResponseParam(400, StatusCodeConst::USER_HOBBY_REGISTER_ERROR);
         }
+
+        $result = UserHobby::getHobbyInfoFindByPk($hobbyId);
 
         return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE, ['hobbyId' => $result]);
     }

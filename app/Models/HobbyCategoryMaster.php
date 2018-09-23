@@ -89,4 +89,19 @@ class HobbyCategoryMaster extends Model
     {
         return DB::table($apiTypes['tableName'])->insertGetId($data);
     }
+
+    /**
+     * 趣味情報取得
+     *
+     * @param array $apiTypes API種別
+     * @param int $id 趣味情報ID
+     * @return array 趣味情報
+     */
+    public static function getHobbyInfo($apiTypes, $id)
+    {
+        return DB::table($apiTypes['tableName'])
+            ->where('is_active', 1)
+            ->where('id', $id)
+            ->first();
+    }
 }
