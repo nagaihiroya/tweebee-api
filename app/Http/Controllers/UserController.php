@@ -30,9 +30,14 @@ class UserController extends Controller
             return CommonUtil::makeResponseParam(400, StatusCodeConst::PARAMETER_INVALID_ERROR, $result);
         }
         // ユーザーが登録済みかどうかの判定
-        $result = UserFoundation::checkAlreadyRegister($data['user_id']);
+        $result = UserFoundation::checkAlreadyRegister($data);
         if ($result) {
-            return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE, 'already');
+            return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE);
+        }
+        // 過去に登録されていた場合は有効化
+        $result = UserFoundation::checkPastRegistered($data);
+        if ($result) {
+            return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE);
         }
         // 登録データセット
         $registData = UserFoundation::registDataSet($data);

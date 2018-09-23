@@ -17,7 +17,7 @@ class HobbyTagMaster extends Migration
             $table->increments('id')->comment('趣味タグID');
             $table->unsignedInteger('genre_id')->comment('趣味ジャンルID');
             $table->string('tag_name', 255)->comment('趣味タグ名');
-            $table->boolean('is_active')->comment('有効フラグ');
+            $table->boolean('is_active')->default(1)->comment('有効フラグ');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('登録日');
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'))->comment('更新日');
         });

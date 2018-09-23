@@ -19,7 +19,7 @@ class UserHobby extends Migration
             $table->unsignedInteger('category_id')->comment('趣味カテゴリID');
             $table->unsignedInteger('genre_id')->nullable()->comment('趣味ジャンルID');
             $table->unsignedInteger('tag_id')->nullable()->comment('趣味タグID');
-            $table->boolean('is_active')->comment('有効フラグ');
+            $table->boolean('is_active')->default(1)->comment('有効フラグ');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('登録日');
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'))->comment('更新日');
             $table->index(['id', 'user_id']);

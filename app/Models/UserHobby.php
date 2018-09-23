@@ -57,7 +57,6 @@ class UserHobby extends Model
             'category_id' => $data['category_id'],
             'genre_id' => isset($data['genre_id']) ? $data['genre_id'] : null,
             'tag_id' => isset($data['tag_id']) ? $data['tag_id'] : null,
-            'is_active' => 1,
         );
     }
 

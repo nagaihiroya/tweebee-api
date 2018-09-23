@@ -16,8 +16,7 @@ class UserFoundationsTable extends Migration
         Schema::create('user_foundations', function (Blueprint $table) {
             $table->increments('id')->comment('ID');
             $table->string('user_id', 255)->unique()->comment('ユーザーID');
-            $table->string('oauth_token', 255)->comment('twitter認証トークン');
-            $table->string('oauth_token_secret', 255)->comment('twitter認証シークレットトークン');
+            $table->boolean('is_active')->default(1)->comment('有効フラグ');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('登録日');
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'))->comment('更新日');
         });

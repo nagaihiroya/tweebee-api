@@ -74,7 +74,6 @@ class HobbyCategoryMaster extends Model
         return array(
             $apiTypes['parentIdColumnName'] => $data['parent_id'],
             $apiTypes['nameColumnName'] => $data['name'],
-            'is_active' => 1,
         );
     }
 
@@ -115,10 +114,11 @@ class HobbyCategoryMaster extends Model
     public static function hobbyShaper($apiTypes, $data)
     {
         $parent = $apiTypes['parentIdColumnName'];
+        $name = $apiTypes['nameColumnName'];
 
         return array(
             'id' => $data->id,
-            'name' => $data->tag_name,
+            'name' => $data->$name,
             'parentType' => $parent,
             'parentId' => $data->$parent,
         );

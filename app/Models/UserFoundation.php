@@ -35,8 +35,6 @@ class UserFoundation extends Model
     {
         $validatedData = Validator::make($data,[
             'user_id' => ['required','max:255'],
-            'oauth_token' => 'required|max:255',
-            'oauth_token_secret' => 'required|max:255',
         ]);
 
         return $validatedData->errors()->all();
@@ -45,14 +43,16 @@ class UserFoundation extends Model
     /**
      * ユーザーが登録済みかどうか判定
      *
-     * @param string $userId ユーザーID
+     * @param array $data ユーザー基礎情報
      * @return bool 登録済みかどうか
      */
-    public static function checkAlreadyRegister($userId)
+    public static function checkAlreadyRegister($data)
     {
-        $data = UserFoundation::where('user_id', $userId)->first();
+        $result = UserFoundation::where('user_id', $data['user_id'])
+            ->where('is_active', 1)
+            ->first();
 
-        if (empty($data)) {
+        if (empty($result)) {
             return false;
         }
         return true;
@@ -68,8 +68,6 @@ class UserFoundation extends Model
     {
         return array(
             'user_id' => $data['user_id'],
-            'oauth_token' => $data['oauth_token'],
-            'oauth_token_secret' => $data['oauth_token_secret'],
         );
     }
 
@@ -86,5 +84,18 @@ class UserFoundation extends Model
         ]);
 
         return $validatedData->errors()->all();
+    }
+
+    /**
+     * 過去に登録済みの場合は有効化する
+     *
+     * @param array $data ユーザー基礎情報
+     * @return boolean 処理成否
+     */
+    public static function checkPastRegistered($data)
+    {
+        return UserFoundation::where('user_id', $data['user_id'])
+            ->where('is_active', 0)
+            ->update(['is_active' => 1]);
     }
 }
