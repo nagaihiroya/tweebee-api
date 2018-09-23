@@ -98,4 +98,17 @@ class UserFoundation extends Model
             ->where('is_active', 0)
             ->update(['is_active' => 1]);
     }
+
+    /**
+     * ユーザー論理削除
+     *
+     * @param array $data ユーザー基礎情報
+     * @return boolean 処理成否
+     */
+    public static function deleteUserFoundation($data)
+    {
+        return UserFoundation::where('user_id', $data['user_id'])
+            ->where('is_active', 1)
+            ->update(['is_active' => 0]);
+    }
 }

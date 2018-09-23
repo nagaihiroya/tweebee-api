@@ -182,4 +182,28 @@ class UserController extends Controller
 
         return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE, $userHobbyInfo);
     }
+
+    /**
+     * ユーザー削除(論理)
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function foundationDelete(Request $request)
+    {
+        $data = $request->all();
+
+        // パラメータの整合性チェック
+        $result = UserFoundation::paramValidation($data);
+        if (!empty($result)) {
+            return CommonUtil::makeResponseParam(400, StatusCodeConst::PARAMETER_INVALID_ERROR, $result);
+        }
+        // ユーザー論理削除
+        $result = UserFoundation::deleteUserFoundation($data);
+        if (!$result) {
+            return CommonUtil::makeResponseParam(400, StatusCodeConst::DELETE_FAILD_ERROR);
+        }
+
+        return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE);
+    }
 }
