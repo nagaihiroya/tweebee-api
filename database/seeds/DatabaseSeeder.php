@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(HobbyCategoryTableSeeder::class);
         $this->call(HobbyTagTableSeeder::class);
         $this->call(HobbyGenreTableSeeder::class);
+        $this->call(UserHobbiesTableSeeder::class);
     }
 }
