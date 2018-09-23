@@ -117,6 +117,7 @@ class UserHobby extends Model
         $tmp = DB::table('user_hobbies')
             ->where('user_id', $data['user_id'])
             ->where('is_active', 1)
+            ->orderBy('category_id', 'asc')
             ->orderBy('id', 'asc')
             ->get();
         foreach ($tmp as $value) {
