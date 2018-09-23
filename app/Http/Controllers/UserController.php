@@ -103,7 +103,7 @@ class UserController extends Controller
 
         $result = UserHobby::getHobbyInfoFindByPk($hobbyId);
 
-        return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE, ['hobbyId' => $result]);
+        return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE, $result);
     }
 
     /**

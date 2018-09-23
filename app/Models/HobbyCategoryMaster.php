@@ -104,4 +104,23 @@ class HobbyCategoryMaster extends Model
             ->where('id', $id)
             ->first();
     }
+
+    /**
+     * 趣味情報整形
+     *
+     * @param array $apiTypes API種別
+     * @param array $data 趣味情報
+     * @return array 結果配列
+     */
+    public static function hobbyShaper($apiTypes, $data)
+    {
+        $parent = $apiTypes['parentIdColumnName'];
+
+        return array(
+            'id' => $data->id,
+            'name' => $data->tag_name,
+            'parentType' => $parent,
+            'parentId' => $data->$parent,
+        );
+    }
 }

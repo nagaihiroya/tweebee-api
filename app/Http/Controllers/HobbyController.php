@@ -60,9 +60,9 @@ class HobbyController extends Controller
         $id = HobbyCategoryMaster::registerHobby($apiTypes, $registerData);
         $hobbyData = HobbyCategoryMaster::getHobbyInfo($apiTypes, $id);
 
-        $parent = $apiTypes['parentIdColumnName'];
-        $name = $apiTypes['nameColumnName'];
+        // 結果データの整形
+        $result = HobbyCategoryMaster::hobbyShaper($apiTypes, $hobbyData);
 
-        return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE, ['id' => $hobbyData->id, 'type' => $parent, 'parentId' => $hobbyData->$parent, 'name' => $hobbyData->$name]);
+        return CommonUtil::makeResponseParam(200, StatusCodeConst::SUCCESS_CODE, $result);
     }
 }
