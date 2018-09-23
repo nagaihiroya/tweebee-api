@@ -48,4 +48,52 @@ class TwitterUtil
             'profile_image_url_https' => $twitterUserInfo->profile_image_url_https,
         ];
     }
+
+    /**
+     * ツイートする
+     *
+     * @param array $data ユーザー情報
+     * @param string $tweet ツイート文章
+     * @return boolean 処理成否
+     */
+    public function sendTweet($data, $tweet)
+    {
+        // 認証情報取得
+        $twitterOAuth = self::getTwitterOAuth($data['oauth_token'], $data['oauth_token_secret']);
+        // twitterアカウント情報を取得
+        $result = $twitterOAuth->post("statuses/update", array("status" => $tweet));
+        if (isset($result->errors)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * ツイッター認証情報取得
+     *
+     * @param string $oauthToken 認証トークン
+     * @param string $oauthTokenSecret 認証秘密トークン
+     * @return object TwitterOAuth
+     */
+    private function getTwitterOAuth($oauthToken, $oauthTokenSecret)
+    {
+        return new TwitterOAuth(
+            config('twitter.consumer_key'),
+            config('twitter.consumer_secret'),
+            $oauthToken,
+            $oauthTokenSecret
+        );
+    }
+
+    /**
+     * ツイート文章を作成
+     *
+     * @param array $hobbyInfo ユーザー趣味情報
+     * @return string ツイート文章
+     */
+    public function makeTweet($hobbyInfo)
+    {
+        // TODO: 仕様が決まり次第対応 nagai
+        return 'Hello, World!';
+    }
 }

@@ -111,4 +111,21 @@ class UserFoundation extends Model
             ->where('is_active', 1)
             ->update(['is_active' => 0]);
     }
+
+    /**
+     * パラメータの整合性チェック(tweet)
+     *
+     * @param $data リクエストパラメータ
+     * @return array エラー配列
+     */
+    public static function paramValidationTweet($data)
+    {
+        $validatedData = Validator::make($data,[
+            'user_id' => 'required',
+            'oauth_token' => 'required',
+            'oauth_token_secret' => 'required',
+        ]);
+
+        return $validatedData->errors()->all();
+    }
 }

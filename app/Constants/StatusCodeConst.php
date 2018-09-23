@@ -25,4 +25,6 @@ class StatusCodeConst
     const HOBBY_ALREADY_REGISTER_ERROR = '107';
     // ユーザー削除エラーコード
     const DELETE_FAILD_ERROR = '108';
+    // ツイート失敗エラーコード
+    const TWEET_FAILD_ERROR = '109';
 }

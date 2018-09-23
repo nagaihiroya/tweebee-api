@@ -26,3 +26,7 @@ Route::group(['prefix' => 'hobby'], function() {
     Route::post('/master', 'HobbyController@getHobbyMaster');
     Route::post('/register/{type}', 'HobbyController@hobbyRegister');
 });
+
+Route::group(['prefix' => 'twitter'], function() {
+    Route::post('/hobby_tweet', 'TwitterController@hobbyTweet');
+});
