@@ -27,4 +27,6 @@ class StatusCodeConst
     const DELETE_FAILD_ERROR = '108';
     // ツイート失敗エラーコード
     const TWEET_FAILD_ERROR = '109';
+    // データ取得エラーコード
+    const SELECT_FAILD_ERROR = '110';
 }
