@@ -95,7 +95,7 @@ class TwitterUtil
     {
         $emoji = ['🥇', '🥈', '🥉'];
         $count = 0;
-        $tweet = 'TweeBeeで自分の趣味を公開しよう！\n僕の趣味はこれ！\n\n';
+        $tweet = '#TweeBee で自分の趣味を公開しよう！\n僕の趣味はこれ！\n\n';
         foreach ($hobbyInfo as $key => $value) {
             $category = $value->category_name;
             $genre = isset($value->genre_name) ? '/' . $value->genre_name : '';
@@ -103,7 +103,7 @@ class TwitterUtil
             $tweet .= $emoji[$count] . "${category}${genre}${tag}\n";
             ++$count;
         }
-        $tweet .= 'http://tweebee.net/?user=shokupankun';
+        $tweet .= 'http://tweebee.net';
 
         // 改行コード変換
         return str_replace('\\n', PHP_EOL, $tweet);
