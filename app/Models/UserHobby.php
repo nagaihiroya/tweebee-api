@@ -28,6 +28,7 @@ class UserHobby extends Model
             'category_id' => 'required|max:255',
             'genre_id' => 'max:255',
             'tag_id' => 'max:255',
+            'rank' => 'max:255',
         ]);
 
         return $validatedData->errors()->all();
@@ -57,6 +58,7 @@ class UserHobby extends Model
             'category_id' => $data['category_id'],
             'genre_id' => isset($data['genre_id']) ? $data['genre_id'] : null,
             'tag_id' => isset($data['tag_id']) ? $data['tag_id'] : null,
+            'rank' => isset($data['rank']) ? $data['rank'] : null,
         );
     }
 
@@ -211,6 +213,7 @@ class UserHobby extends Model
             ->leftJoin('hobby_tag_master', 'user_hobbies.tag_id', '=', 'hobby_tag_master.id')
             ->where('user_hobbies.user_id', $data['user_id'])
             ->where('user_hobbies.is_active', 1)
+            ->orderBy('user_hobbies.rank', 'desc')
             ->orderBy('user_hobbies.id', 'asc')
             ->limit($limit)
             ->get();
