@@ -23,6 +23,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            'CommonUtil',
+            'App\Utils\CommonUtil'
+        );
+        $this->app->bind(
+            'TwitterUtil',
+            'App\Utils\TwitterUtil'
+        );
     }
 }

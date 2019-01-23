@@ -15,4 +15,19 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'user'], function() {
     Route::post('/register', 'UserController@foundationRegister');
+    Route::post('/delete', 'UserController@foundationDelete');
+    Route::post('/info', 'UserController@getUserInformation');
+    Route::post('/hobby_register', 'UserController@hobbyInfoRegister');
+    Route::post('/hobby_delete', 'UserController@hobbyInfoDelete');
+    Route::post('/hobby_get', 'UserController@hobbyInfoGet');
+});
+
+Route::group(['prefix' => 'hobby'], function() {
+    Route::post('/master', 'HobbyController@getHobbyMaster');
+    Route::post('/register/{type}', 'HobbyController@hobbyRegister');
+    Route::post('/ranking/{type}', 'HobbyController@hobbyRanking');
+});
+
+Route::group(['prefix' => 'twitter'], function() {
+    Route::post('/hobby_tweet', 'TwitterController@hobbyTweet');
 });
