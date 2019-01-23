@@ -194,4 +194,30 @@ class UserHobby extends Model
             ->where('is_active', 1)
             ->first();
     }
+
+    /**
+     * ユーザー趣味情報を取得
+     *
+     * @param array $data ユーザー情報
+     * @return array $result ユーザー趣味情報
+     */
+    public static function getUserHobbyInfoForTweet($data, $limit = 50)
+    {
+        $result = [];
+        $tmp = DB::table('user_hobbies')
+            ->select('user_hobbies.user_id', 'hobby_category_master.category_name', 'hobby_genre_master.genre_name', 'hobby_tag_master.tag_name')
+            ->leftJoin('hobby_category_master', 'user_hobbies.category_id', '=', 'hobby_category_master.id')
+            ->leftJoin('hobby_genre_master', 'user_hobbies.genre_id', '=', 'hobby_genre_master.id')
+            ->leftJoin('hobby_tag_master', 'user_hobbies.tag_id', '=', 'hobby_tag_master.id')
+            ->where('user_hobbies.user_id', $data['user_id'])
+            ->where('user_hobbies.is_active', 1)
+            ->orderBy('user_hobbies.id', 'asc')
+            ->limit($limit)
+            ->get();
+
+        foreach ($tmp as $value) {
+            $result[] = $value;
+        }
+        return $result;
+    }
 }
