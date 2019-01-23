@@ -63,7 +63,6 @@ class TwitterUtil
         // twitterアカウント情報を取得
         $result = $twitterOAuth->post("statuses/update", array("status" => $tweet));
         if (isset($result->errors)) {
-            var_dump($result->errors);
             return false;
         }
         return true;
