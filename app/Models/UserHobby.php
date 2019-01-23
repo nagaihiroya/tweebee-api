@@ -201,7 +201,7 @@ class UserHobby extends Model
      * @param array $data ユーザー情報
      * @return array $result ユーザー趣味情報
      */
-    public static function getUserHobbyInfoForTweet($data)
+    public static function getUserHobbyInfoForTweet($data, $limit = 50)
     {
         $result = [];
         $tmp = DB::table('user_hobbies')
@@ -212,6 +212,7 @@ class UserHobby extends Model
             ->where('user_hobbies.user_id', $data['user_id'])
             ->where('user_hobbies.is_active', 1)
             ->orderBy('user_hobbies.id', 'asc')
+            ->limit($limit)
             ->get();
 
         foreach ($tmp as $value) {

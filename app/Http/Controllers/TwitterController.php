@@ -30,7 +30,7 @@ class TwitterController extends Controller
             return CommonUtil::makeResponseParam(400, StatusCodeConst::PARAMETER_INVALID_ERROR, $result);
         }
         // 趣味情報を取得
-        $hobbyInfo = UserHobby::getUserHobbyInfoForTweet($data);
+        $hobbyInfo = UserHobby::getUserHobbyInfoForTweet($data, 3);
         // ツイートを作成
         $tweet = TwitterUtil::makeTweet($hobbyInfo);
         // ツイート

@@ -63,6 +63,7 @@ class TwitterUtil
         // twitterアカウント情報を取得
         $result = $twitterOAuth->post("statuses/update", array("status" => $tweet));
         if (isset($result->errors)) {
+            var_dump($result->errors);
             return false;
         }
         return true;
@@ -93,7 +94,18 @@ class TwitterUtil
      */
     public function makeTweet($hobbyInfo)
     {
-        // TODO: 仕様が決まり次第対応 nagai
-        return 'Hello, World!';
+        $count = 1;
+        $tweet = 'TweeBeeで自分の趣味を共有しよう！\n僕の趣味はこれ！\n\n';
+        foreach ($hobbyInfo as $key => $value) {
+            $category = $value->category_name;
+            $genre = isset($value->genre_name) ? '/' . $value->genre_name : '';
+            $tag = isset($value->tag_name) ? '/' . $value->tag_name : '';
+            $tweet .= "${count}. ${category}${genre}${tag}\n";
+            ++$count;
+        }
+        $tweet .= 'http://tweebee.net/?user=shokupankun';
+
+        // 改行コード変換
+        return str_replace('\\n', PHP_EOL, $tweet);
     }
 }
