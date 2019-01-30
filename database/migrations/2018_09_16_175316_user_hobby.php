@@ -15,7 +15,7 @@ class UserHobby extends Migration
     {
         Schema::create('user_hobbies', function (Blueprint $table) {
             $table->increments('id')->comment('ID');
-            $table->unsignedInteger('user_id')->comment('ユーザーID');
+            $table->string('user_id', 255)->comment('ユーザーID');
             $table->unsignedInteger('category_id')->comment('趣味カテゴリID');
             $table->unsignedInteger('genre_id')->nullable()->comment('趣味ジャンルID');
             $table->unsignedInteger('tag_id')->nullable()->comment('趣味タグID');
